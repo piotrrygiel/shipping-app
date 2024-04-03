@@ -1,0 +1,54 @@
+<div style="padding: 24px;">
+  <h1>Shipping cost calculator</h1>
+  <div class="mat-elevation-z12" style="padding: 24px;">
+    <form [formGroup]="shippingForm" (ngSubmit)="onSubmit()">
+      <div style="display: flex; flex-direction: row;">
+        <div style="width: 40%;">
+          <h3>Shipping details</h3>
+        </div>
+        <div style="display: flex; flex-direction: column; flex: 1;">
+          <mat-form-field>
+            <mat-label>Postcode</mat-label>
+            <input matInput type="text" maxlength="5" formControlName="postcode">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Total order amount</mat-label>
+            <input matInput type="number" formControlName="totalOrderAmount">
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div style="display: flex; flex-direction: row;">
+        <div style="width: 40%;">
+          <h3>Long product</h3>
+          <p>Click the checkbox, if your product meets the condition of long product.</p>
+        </div>
+        <mat-checkbox
+          formControlName="isLongProd"
+          color="primary"></mat-checkbox>
+      </div>
+      <mat-divider></mat-divider>
+      <div style="display: flex; flex-direction: row;">
+        <div style="width: 40%;">
+          <h3>Upload</h3>
+          <p>Import a file with zone costs.</p>
+        </div>
+        <input type="file" (change)="onZonesImport($event)" style="padding-top: 12px;">
+      </div>
+      <mat-divider></mat-divider>
+      <div style="padding-top: 12px">
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="!shippingForm.valid">Submit</button>
+      </div>
+    </form>
+    <div *ngIf="is_submitted" style="padding-top: 12px;">
+      <h3>Summary: </h3>
+      <p>Your zone is: {{ zone }}</p>
+      <p>Your total: {{ total }} €</p>
+      <p>Shipping cost: {{ shipping_cost }} €</p>
+    </div>
+  </div>
+</div>
